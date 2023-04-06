@@ -22,7 +22,7 @@ class ObstacleManager():
         self.score = 0
         self.text = Text()
 
-    def update(self, game_speed, player):
+    def update(self, game_speed, player, game):
         #generamos los obstaculos cuando no tengamos ninguno
         if not self.obstacles:
             probability = random.randint(0, 7)
@@ -45,7 +45,7 @@ class ObstacleManager():
 
             if obstacle.collide(player):
                 self.cactus_bang += 1
-                self.score_cactus = self.score_cactus - 50
+                self.score_cactus = self.score_cactus - 100
 
         for bird in self.obstacles:
             bird.update(game_speed, self.obstacles)
@@ -60,8 +60,9 @@ class ObstacleManager():
                 self.score_bird = self.score_bird - 25
             
         self.score = self.score_cactus + self.score_bird
-        if self.score == -100:
-            pygame.QUIT
+        
+        #if self.score == -100:
+            #game.playing = False
         
     
     def draw(self, screen):
@@ -70,12 +71,12 @@ class ObstacleManager():
             obstacle.draw(screen)
         for bird in self.obstacles:
             bird.draw(screen)
-        self.text.show(screen, 13, f"Cactus Deaths: {self.cactus_bang}", pos_x = 110, pos_y = 20)
-        self.text.show(screen, 13, f"Cactus Number: {self.cactus_count}", pos_x = 110, pos_y = 40)
-        self.text.show(screen, 13, f"Cactus Evaded: {self.cactus_evaded}", pos_x = 110, pos_y = 60)
-        self.text.show(screen, 13, f"Bird Deaths: {self.bird_bang}", pos_x = 98, pos_y = 90)
-        self.text.show(screen, 13, f"Bird Number: {self.bird_count}", pos_x = 98, pos_y = 110)
-        self.text.show(screen, 13, f"Bird Evaded: {self.bird_evaded}", pos_x = 98, pos_y = 130)
+        self.text.show(screen, 13, f"Cactus Deaths: {self.cactus_bang}", pos_x = 110, pos_y = 20, color=(1,93,82))
+        self.text.show(screen, 13, f"Cactus Number: {self.cactus_count}", pos_x = 110, pos_y = 40, color=(1,93,82))
+        self.text.show(screen, 13, f"Cactus Evaded: {self.cactus_evaded}", pos_x = 110, pos_y = 60, color=(1,93,82))
+        self.text.show(screen, 13, f"Bird Deaths: {self.bird_bang}", pos_x = 98, pos_y = 90, color=(59,131,189))
+        self.text.show(screen, 13, f"Bird Number: {self.bird_count}", pos_x = 98, pos_y = 110, color=(59,131,189))
+        self.text.show(screen, 13, f"Bird Evaded: {self.bird_evaded}", pos_x = 98, pos_y = 130, color=(59,131,189))
         self.text.show(screen, 13, f"Score: {self.score}", pos_x = 555, pos_y = 80)
 
 

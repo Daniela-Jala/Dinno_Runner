@@ -10,8 +10,6 @@ from dinno_runner_game.utils.constants import BG, BG2, FPS, ICON, SCREEN_HEIGHT,
 from dinno_runner_game.components.obstacles.obstacle_manager_2 import ObstacleManager2
 
 
-
-
 class Game:
     def __init__(self):
         pygame.init()
@@ -25,7 +23,6 @@ class Game:
         self.y_pos_bg = 380
         self.x_pos_bg2 = 0
         self.y_pos_bg2 = 380
-        self.death_count = 0
         self.cloud_manager = CloudManager()
         self.sun_manager = SunManager()
         self.player = Dinosaur()
@@ -55,7 +52,7 @@ class Game:
         if user_input[pygame.K_r]:
             self.cloud_manager.update(self)
             self.sun_manager.update(self.game_speed)
-            self.obstacle_manager.update(self.game_speed, self.player)
+            self.obstacle_manager.update(self.game_speed, self.player, self)
         #self.obstacle_manager2.update(self.game_speed, self.player)
 
         self.player.update(user_input)
@@ -74,7 +71,8 @@ class Game:
     def draw_background(self, screen):
         user_input = pygame.key.get_pressed()
         image_width_bg2 = BG2.get_width()
-        self.text.show(screen, 16, "Name:THE KING", pos_x = 555, pos_y = 20)
+        self.text.show(screen, 16, "Name:", pos_x = 480, pos_y = 20, color = (60,60,60))
+        self.text.show(screen, 16, "THE KING", pos_x = 580, pos_y = 20, color = (255,60,60))
         self.screen.blit(BG2, (self.x_pos_bg2, self.y_pos_bg2))
         self.screen.blit(BG2, (image_width_bg2 + self.x_pos_bg2, self.y_pos_bg2))
         if user_input[pygame.K_r]:
@@ -91,7 +89,6 @@ class Game:
                 self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
                 self.x_pos_bg = 0
             self.x_pos_bg -= self.game_speed
-        
         
     
     
