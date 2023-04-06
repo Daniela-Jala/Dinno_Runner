@@ -8,6 +8,8 @@ from dinno_runner_game.components.text import Text
 
 from dinno_runner_game.utils.constants import BG, BG2, FPS, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SOUND, TITLE
 from dinno_runner_game.components.obstacles.obstacle_manager_2 import ObstacleManager2
+from dinno_runner_game.utils.constants import FONT_STYLE
+from dinno_runner_game.utils.constants import DINO_START
 
 
 class Game:
@@ -33,6 +35,7 @@ class Game:
         self.start_sound = pygame.mixer.music.load(SOUND) 
         self.start_sound = pygame.mixer.music.play(-1)
         self.start_sound = pygame.mixer.music.set_volume(0.1)
+
 
     def run(self):
         self.playing = True
@@ -89,7 +92,8 @@ class Game:
                 self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
                 self.x_pos_bg = 0
             self.x_pos_bg -= self.game_speed
-        
+
+
     
     
 
