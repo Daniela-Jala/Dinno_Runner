@@ -1,4 +1,6 @@
 import random
+
+import pygame
 from dinno_runner_game.components.obstacles.obstacle import Obstacle
 from dinno_runner_game.components.obstacles.cactus import Cactus
 from dinno_runner_game.components.text import Text
@@ -29,7 +31,7 @@ class ObstacleManager():
                 self.obstacles.append(Cactus()) # y como tenemos una lista vacia ahi entra las imagenes de los obstaculos
                 self.cactus_count +=  1
 
-            else:
+            if probability <= 3:
                 self.obstacles.append(Bird())
                 self.bird_count += 1
 
@@ -58,11 +60,16 @@ class ObstacleManager():
                 self.score_bird = self.score_bird - 25
             
         self.score = self.score_cactus + self.score_bird
+        if self.score == -100:
+            pygame.QUIT
+        
     
     def draw(self, screen):
 
         for obstacle in self.obstacles:
             obstacle.draw(screen)
+        for bird in self.obstacles:
+            bird.draw(screen)
         self.text.show(screen, 13, f"Cactus Deaths: {self.cactus_bang}", pos_x = 110, pos_y = 20)
         self.text.show(screen, 13, f"Cactus Number: {self.cactus_count}", pos_x = 110, pos_y = 40)
         self.text.show(screen, 13, f"Cactus Evaded: {self.cactus_evaded}", pos_x = 110, pos_y = 60)

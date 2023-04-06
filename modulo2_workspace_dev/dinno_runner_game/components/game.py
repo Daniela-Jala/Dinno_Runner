@@ -7,6 +7,7 @@ from dinno_runner_game.components.suns.sun_manager import SunManager
 from dinno_runner_game.components.text import Text
 
 from dinno_runner_game.utils.constants import BG, BG2, FPS, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SOUND, TITLE
+from dinno_runner_game.components.obstacles.obstacle_manager_2 import ObstacleManager2
 
 
 
@@ -29,6 +30,7 @@ class Game:
         self.sun_manager = SunManager()
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
+        self.obstacle_manager2 = ObstacleManager2()
         self.text = Text()
         pygame.mixer.init()
         self.start_sound = pygame.mixer.music.load(SOUND) 
@@ -54,6 +56,7 @@ class Game:
             self.cloud_manager.update(self)
             self.sun_manager.update(self.game_speed)
             self.obstacle_manager.update(self.game_speed, self.player)
+        #self.obstacle_manager2.update(self.game_speed, self.player)
 
         self.player.update(user_input)
 
