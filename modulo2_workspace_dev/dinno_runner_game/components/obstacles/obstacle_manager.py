@@ -1,6 +1,7 @@
 import random
 
 import pygame
+from dinno_runner_game.utils.constants import DINO_DEAD, FONT_STYLE, GAME_OVER, SCREEN_HEIGHT, SCREEN_WIDTH
 from dinno_runner_game.components.obstacles.obstacle import Obstacle
 from dinno_runner_game.components.obstacles.cactus import Cactus
 from dinno_runner_game.components.text import Text
@@ -22,7 +23,7 @@ class ObstacleManager():
         self.score = 0
         self.text = Text()
 
-    def update(self, game_speed, player, game):
+    def update(self, game_speed, player, game, screen):
         #generamos los obstaculos cuando no tengamos ninguno
         if not self.obstacles:
             probability = random.randint(0, 7)
@@ -43,7 +44,7 @@ class ObstacleManager():
                 self.cactus_evaded += 1
                 self.score_cactus = self.score_cactus + 100
 
-            if obstacle.collide(player):
+            elif obstacle.collide(player):
                 self.cactus_bang += 1
                 self.score_cactus = self.score_cactus - 100
 
@@ -55,15 +56,24 @@ class ObstacleManager():
                 self.bird_evaded += 1
                 self.score_bird = self.score_bird + 75
 
-            if obstacle.collide(player):
+            elif obstacle.collide(player):
                 self.bird_bang += 1
                 self.score_bird = self.score_bird - 25
             
         self.score = self.score_cactus + self.score_bird
         
-        #if self.score == -100:
-            #game.playing = False
-        
+        if self.score == -100:
+            game.playing = False
+            self.cactus_bang = 0
+            self.cactus_count = 0
+            self.cactus_evaded = 0
+            self.bird_bang = 0
+            self.bird_count = 0
+            self.bird_evaded = 0
+            self.score_cactus = 0
+            self.score_bird = 0
+            self.score = 0
+
     
     def draw(self, screen):
 
@@ -78,5 +88,9 @@ class ObstacleManager():
         self.text.show(screen, 13, f"Bird Number: {self.bird_count}", pos_x = 98, pos_y = 110, color=(59,131,189))
         self.text.show(screen, 13, f"Bird Evaded: {self.bird_evaded}", pos_x = 98, pos_y = 130, color=(59,131,189))
         self.text.show(screen, 13, f"Score: {self.score}", pos_x = 555, pos_y = 80)
+    
+    def reset(self):
+        self.obstacles = []
+
 
 

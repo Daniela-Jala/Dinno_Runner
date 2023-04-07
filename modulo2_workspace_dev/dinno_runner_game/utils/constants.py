@@ -10,7 +10,6 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
-DINO_START = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png")),
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
@@ -71,12 +70,16 @@ CLOUD = [
 SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png"))
+DINO_START = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
+
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 BG2 = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track2.png'))
 SUN = pygame.image.load(os.path.join(IMG_DIR, 'Other/Sun.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
+
+GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, 'Other/GameOver.png'))
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
@@ -85,5 +88,6 @@ HAMMER_TYPE = "hammer"
 SOUND = "Sound.wav"
 SOUND_JUMP = "JumpSound.ogg"
 SOUND_DUCKING = "DuckSound.ogg"
+
 
 FONT_STYLE = "PressStart2P-Regular.ttf"
